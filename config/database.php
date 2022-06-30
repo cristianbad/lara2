@@ -2,13 +2,6 @@
 
 use Illuminate\Support\Str;
 
-$url = parse_url(getenv("DATABASE_URL"));
-
-$host = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$database = substr($url["path"], 1);
-
 return [
 
     /*
@@ -71,14 +64,18 @@ return [
         ],
 
         'pgsql' => [
-            'driver'   => 'pgsql',
-            'host'     => $host,
-            'database' => $database,
-            'username' => $username,
-            'password' => $password,
-            'charset'  => 'utf8',
-            'prefix'   => '',
-            'schema'   => 'public',
+            'driver' => 'pgsql',
+            'url' => 'postgres://qyqkixtzeljejn:8141d1b924cba405f8f776cfda5e416bb72bfbd1bd9315735b25ec4c84cc2e84@ec2-44-198-82-71.compute-1.amazonaws.com:5432/d5jv7fi26coaur',
+            'host' => 'ec2-44-198-82-71.compute-1.amazonaws.com',
+            'port' => '5432',
+            'database' => 'd5jv7fi26coaur',
+            'username' => 'qyqkixtzeljejn',
+            'password' => '8141d1b924cba405f8f776cfda5e416bb72bfbd1bd9315735b25ec4c84cc2e84',
+            'charset' => 'utf8',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'search_path' => 'public',
+            'sslmode' => 'prefer',
         ],
 
         'sqlsrv' => [
@@ -128,7 +125,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
         ],
 
         'default' => [
