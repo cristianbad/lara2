@@ -28,6 +28,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::unguard();
         //Paginator::useBootstrap();
-        URL::forceScheme('https');
+        //URL::forceScheme('https');
     }
 }

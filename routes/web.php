@@ -32,19 +32,22 @@ Route::controller(MaterialController::class)->group(function () {
     //show all material on index page
     Route::get('/', 'index')->name('home');
 
-    Route::middleware(['auth'])->group(function () {
-        //add new matrerial fron index page
-        Route::post('/materials', 'store');
-        //edit material on index page
-        Route::get('/materials/{material}/edit', 'edit');
-        //update material on index page
-        Route::put('/materials/{material}', 'update');
-        //destroy material from index page
-        Route::delete('/materials/{material}', 'destroy');
+    Route::middleware(['headers'])->group(function () {
+        
+        Route::middleware(['auth'])->group(function () {
+            //add new matrerial fron index page
+            Route::post('/materials', 'store');
+            //edit material on index page
+            Route::get('/materials/{material}/edit', 'edit');
+            //update material on index page
+            Route::put('/materials/{material}', 'update');
+            //destroy material from index page
+            Route::delete('/materials/{material}', 'destroy');
 
-        //orderby 
-        Route::get('orderby/{orderby}', 'order');
-
+            //orderby 
+            Route::get('orderby/{orderby}', 'order');
+        });
+        //
     });
 });
 
@@ -66,10 +69,11 @@ Route::controller(UserController::class)->group(function () {
     Route::delete('/accounts/{account}', 'destroy')->middleware('admin');
     //orderby accounts
     Route::get('accounts/{account}', 'order')->middleware('admin');
-
 });
 
-Route::any('{query}', function () { return redirect('/'); })->where('query', '.*');
+Route::any('{query}', function () {
+    return redirect('/');
+})->where('query', '.*');
 
 
 // Route::get('/', function () {
