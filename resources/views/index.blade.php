@@ -93,6 +93,7 @@
             </div><br>
             <div>
                 <label for="quantity">Material quantity</label>
+                
                 <input type="text" name="quantity" value="{{ $editMaterial->quantity ?? old('quantity') }}" />
                 @error('quantity')
                     <label style="color: red">{{ $message }}</label>
